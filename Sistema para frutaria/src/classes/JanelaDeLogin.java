@@ -2,10 +2,6 @@ package classes;
 
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Computer
- */
 public class JanelaDeLogin extends javax.swing.JFrame {
     
     private String usuario = "user123";
