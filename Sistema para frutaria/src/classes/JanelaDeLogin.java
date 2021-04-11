@@ -11,6 +11,7 @@ public class JanelaDeLogin extends javax.swing.JFrame {
         if(usuario.equals(txtUsuario.getText()) && senha.equals(txtSenha.getText())) {
             JanelaPrincipal janelaPrincipal = new JanelaPrincipal();
             janelaPrincipal.setVisible(true);
+            this.dispose();
         } else {
             JOptionPane.showMessageDialog(rootPane, "Senha ou usuário inválido!",
                     "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -43,6 +44,11 @@ public class JanelaDeLogin extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -143,6 +149,10 @@ public class JanelaDeLogin extends javax.swing.JFrame {
     private void txtSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSenhaActionPerformed
         login();
     }//GEN-LAST:event_txtSenhaActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formWindowClosed
 
     /**
      * @param args the command line arguments

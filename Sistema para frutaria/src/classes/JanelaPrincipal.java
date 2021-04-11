@@ -25,7 +25,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         jButton5 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
@@ -34,6 +34,11 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         });
 
         jButton1.setText("Listar Frutas");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Adicionar Fruta");
 
@@ -91,6 +96,11 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         JanelaDeLogin login = new JanelaDeLogin();
         login.setVisible(true);
     }//GEN-LAST:event_formWindowClosed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        JanelaListarFrutas listarFrutas = new JanelaListarFrutas();
+        listarFrutas.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
