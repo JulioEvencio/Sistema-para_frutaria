@@ -11,7 +11,6 @@ public class JanelaDeLogin extends javax.swing.JFrame {
         if(usuario.equals(txtUsuario.getText()) && senha.equals(txtSenha.getText())) {
             JanelaPrincipal janelaPrincipal = new JanelaPrincipal();
             janelaPrincipal.setVisible(true);
-            this.dispose();
         } else {
             JOptionPane.showMessageDialog(rootPane, "Senha ou usuário inválido!",
                     "ERROR", JOptionPane.ERROR_MESSAGE);
