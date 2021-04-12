@@ -5,6 +5,9 @@
  */
 package janelas;
 
+import javax.swing.JOptionPane;
+import servidor.Servidor;
+
 /**
  *
  * @author Computer
@@ -32,9 +35,9 @@ public class JanelaAdicionarFruta extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         nome = new javax.swing.JTextField();
-        quantidade = new javax.swing.JSpinner();
-        preco = new javax.swing.JSpinner();
         btnAdicionar = new javax.swing.JButton();
+        quantidade = new javax.swing.JTextField();
+        preco = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -54,12 +57,17 @@ public class JanelaAdicionarFruta extends javax.swing.JFrame {
 
         nome.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
+        btnAdicionar.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        btnAdicionar.setText("Adicionar");
+        btnAdicionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdicionarActionPerformed(evt);
+            }
+        });
+
         quantidade.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
         preco.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-
-        btnAdicionar.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        btnAdicionar.setText("Adicionar");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -75,8 +83,8 @@ public class JanelaAdicionarFruta extends javax.swing.JFrame {
                             .addComponent(jLabel2)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(quantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel3))
+                                    .addComponent(jLabel3)
+                                    .addComponent(quantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel4)
@@ -101,16 +109,27 @@ public class JanelaAdicionarFruta extends javax.swing.JFrame {
                     .addComponent(jLabel3)
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(quantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(preco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAdicionar))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnAdicionar)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(quantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(preco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
+    double valor = Double.parseDouble(preco.getText());
+    int quant = Integer.parseInt(quantidade.getText());
+    Servidor.setFrutas(nome.getText(), valor, quant);
+    nome.setText("");
+    preco.setText("");
+    quantidade.setText("");
+    JOptionPane.showMessageDialog(rootPane, "Item adicionado!");
+    }//GEN-LAST:event_btnAdicionarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -154,7 +173,7 @@ public class JanelaAdicionarFruta extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JTextField nome;
-    private javax.swing.JSpinner preco;
-    private javax.swing.JSpinner quantidade;
+    private javax.swing.JTextField preco;
+    private javax.swing.JTextField quantidade;
     // End of variables declaration//GEN-END:variables
 }

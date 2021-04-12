@@ -49,9 +49,9 @@ public class Frutaria {
         for (Fruta fruta : estoque.getArmazenado().values()) {
             dados += "Fruta: " + fruta.getNome() + "\n";
             dados += "Valor: " + fruta.getValor() + " reais\n";
-            dados += "Quantidade: " + fruta.getQuantidade() + "\n";
+            dados += "Quantidade: " + fruta.getQuantidade() + "\n\n\n";
         }
-        dados += "";
+        dados += "\n";
 
         return dados;
     }
