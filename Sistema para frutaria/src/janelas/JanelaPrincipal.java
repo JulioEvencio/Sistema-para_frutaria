@@ -1,4 +1,4 @@
-package classes;
+package janelas;
 
 public class JanelaPrincipal extends javax.swing.JFrame {
 

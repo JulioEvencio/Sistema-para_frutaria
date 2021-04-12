@@ -1,4 +1,4 @@
-package classes;
+package janelas;
 
 public class JanelaListarFrutas extends javax.swing.JFrame {
 

@@ -1,4 +1,4 @@
-package classes;
+package janelas;
 
 import javax.swing.JOptionPane;
 
