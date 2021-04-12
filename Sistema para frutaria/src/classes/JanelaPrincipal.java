@@ -47,6 +47,11 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         });
 
         jButton4.setText("Repor Estoque");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jButton5.setText("Realizar Venda");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
@@ -114,6 +119,11 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         JanelaRealizarVenda realizarVenda = new JanelaRealizarVenda();
         realizarVenda.setVisible(true);
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        JanelaReporEstoque reporEstoque = new JanelaReporEstoque();
+        reporEstoque.setVisible(true);
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
