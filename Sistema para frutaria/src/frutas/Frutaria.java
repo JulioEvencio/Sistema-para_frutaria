@@ -1,3 +1,5 @@
+package frutas;
+
 import java.util.ArrayList;
 
 import frutas.*;
@@ -29,7 +31,7 @@ public class Frutaria {
         estoque.vender(frutas);
     }
 
-    public void relatorioArmazenamento() {
+    public String relatorioArmazenamento() {
         System.out.println("");
         System.out.println("Relatório de Frutas Armazenadas");
         System.out.println("");
@@ -39,6 +41,19 @@ public class Frutaria {
             System.out.println("Quantidade: " + fruta.getQuantidade());
         }
         System.out.println("");
+        
+        ///////////////////////////////////////////////////////////
+        
+        String dados = "Relatório de Frutas Armazenadas\n";;
+        dados += "\n";
+        for (Fruta fruta : estoque.getArmazenado().values()) {
+            dados += "Fruta: " + fruta.getNome() + "\n";
+            dados += "Valor: " + fruta.getValor() + " reais\n";
+            dados += "Quantidade: " + fruta.getQuantidade() + "\n";
+        }
+        dados += "";
+
+        return dados;
     }
 
     public void relatorioVendas() {

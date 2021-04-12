@@ -1,3 +1,4 @@
+import frutas.Frutaria;
 import java.util.ArrayList;
 
 import frutas.Fruta;
@@ -13,6 +14,7 @@ public class Start {
     public void setCarrinho(ArrayList<Fruta> carrinho) {
         this.carrinho = carrinho;
     }
+
     public static void main(String args[]) {
 
         Start start = new Start();

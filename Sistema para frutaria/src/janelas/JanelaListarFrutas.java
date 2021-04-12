@@ -1,5 +1,7 @@
 package janelas;
 
+import servidor.Servidor;
+
 public class JanelaListarFrutas extends javax.swing.JFrame {
 
     /**
@@ -7,10 +9,7 @@ public class JanelaListarFrutas extends javax.swing.JFrame {
      */
     public JanelaListarFrutas() {
         initComponents();
-        String texto = "";
-        for (int i = 1; i < 100; i++) {
-            texto += i + ". Teste...\n";
-        }
+        String texto = Servidor.getArmazenamento();
         saida.setText(texto);
     }
 
