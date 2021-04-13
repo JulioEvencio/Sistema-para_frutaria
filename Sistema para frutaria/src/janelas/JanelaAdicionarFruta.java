@@ -122,13 +122,13 @@ public class JanelaAdicionarFruta extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
-    double valor = Double.parseDouble(preco.getText());
-    int quant = Integer.parseInt(quantidade.getText());
-    Servidor.setFrutas(nome.getText(), valor, quant);
-    nome.setText("");
-    preco.setText("");
-    quantidade.setText("");
-    JOptionPane.showMessageDialog(rootPane, "Item adicionado!");
+        double valor = Double.parseDouble(preco.getText());
+        int quant = Integer.parseInt(quantidade.getText());
+        Servidor.setFrutas(nome.getText(), valor, quant);
+        nome.setText("");
+        preco.setText("");
+        quantidade.setText("");
+        JOptionPane.showMessageDialog(rootPane, "Item adicionado!");
     }//GEN-LAST:event_btnAdicionarActionPerformed
 
     /**

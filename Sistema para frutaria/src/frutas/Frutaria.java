@@ -27,8 +27,8 @@ public class Frutaria {
         }
     }
 
-    public void vender(ArrayList<Fruta> frutas){
-        estoque.vender(frutas);
+    public boolean vender(ArrayList<Fruta> frutas){
+        return estoque.vender(frutas);
     }
 
     public String relatorioArmazenamento() {

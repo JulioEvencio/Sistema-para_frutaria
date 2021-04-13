@@ -2,6 +2,7 @@ package servidor;
 
 import frutas.Fruta;
 import frutas.Frutaria;
+import java.util.ArrayList;
 
 public class Servidor {
 
@@ -14,6 +15,12 @@ public class Servidor {
     */
     public static void setFrutas(String nome, double valor, int quantidade) {
         frutaria.adicionarFruta(new Fruta(nome, valor,  quantidade));
+    }
+    
+    public static boolean setVender(String nome, int quantidade) {
+        ArrayList<Fruta> carrinho = new ArrayList<>();
+        carrinho.add(new Fruta(nome, 0.0,  quantidade));
+        return frutaria.vender(carrinho);
     }
     
     //  Back -> Front

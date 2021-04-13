@@ -37,7 +37,8 @@ public final class Estoque {
         guardar(fruta);
     }
 
-    public void vender(ArrayList<Fruta> frutas) {
+    //  Adicionei retorno para saber se a operacao realizada com sucesso
+    public boolean vender(ArrayList<Fruta> frutas) {
         for (Fruta fruta : frutas) {
             Fruta frutaTemp = armazenado.get(fruta.getNome());
             if (frutaTemp != null) {
@@ -53,11 +54,14 @@ public final class Estoque {
                 } else {
                     System.out.println(
                             "Erro na compra: Não temos a quantidade desejada para a fruta: " + fruta.getNome());
+                            return false;
                 }
             } else {
                 System.out.println("Erro na compra: Não existe a fruta: " + fruta.getNome());
+                return false;
             }
         }
+        return true;
     }
 
     // metodo para adicionar no hash que contem as frutas vendidas
