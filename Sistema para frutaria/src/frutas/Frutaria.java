@@ -8,23 +8,10 @@ public class Frutaria {
 
     private Estoque estoque = new Estoque();
 
-    public Frutaria() {
-        System.out.println("Frutaria aberta");
-    }
+    public Frutaria() {}
 
     public void adicionarFruta(Fruta fruta) {
         estoque.armazenar(fruta);
-    }
-
-    public void verFrutas() {
-        System.out.println("");
-        System.out.println("Frutas Disponíveis");
-        System.out.println("");
-        for (Fruta fruta : estoque.getArmazenado().values()) {
-            System.out.println("Fruta: " + fruta.getNome());
-            System.out.println("Valor: " + fruta.getValor() + " reais");
-            System.out.println("Quantidade: " + fruta.getQuantidade());
-        }
     }
 
     public boolean vender(ArrayList<Fruta> frutas){
@@ -32,18 +19,6 @@ public class Frutaria {
     }
 
     public String relatorioArmazenamento() {
-        System.out.println("");
-        System.out.println("Relatório de Frutas Armazenadas");
-        System.out.println("");
-        for (Fruta fruta : estoque.getArmazenado().values()) {
-            System.out.println("Fruta: " + fruta.getNome());
-            System.out.println("Valor: " + fruta.getValor() + " reais");
-            System.out.println("Quantidade: " + fruta.getQuantidade());
-        }
-        System.out.println("");
-        
-        ///////////////////////////////////////////////////////////
-        
         String dados = "Relatório de Frutas Armazenadas\n";;
         dados += "\n";
         for (Fruta fruta : estoque.getArmazenado().values()) {
@@ -56,32 +31,32 @@ public class Frutaria {
         return dados;
     }
 
-    public void relatorioVendas() {
-        System.out.println("");
+    public String relatorioVendas() {
+        String dados = "Relatório de Frutas Vendidas\n";
         double totalAtual = 0;
         double totalVendido = 0;
-        System.out.println("Relatório de Frutas Vendidas");
-        System.out.println("");
         if (estoque.getVendido().size() == 0){
-            System.out.println("Nenhuma Fruta Vendida");
-            System.out.println("");
+            dados += "Nenhuma Fruta Vendida\n";
         }
         for (Fruta fruta : estoque.getVendido().values()) {
-            System.out.println("Fruta: " + fruta.getNome());
-            System.out.println("Valor: " + fruta.getValor() + " reais");
-            System.out.println("Quantidade: " + fruta.getQuantidade());
             totalAtual = fruta.getQuantidade() * fruta.getValor();
-            System.out.println("Valor Adquirido: " + totalAtual + " reais");
             totalVendido += totalAtual;
+            dados += "Fruta: " + fruta.getNome() + "\n";
+            dados += "Valor: " + fruta.getValor() + " reais\n";
+            dados += "Quantidade: " + fruta.getQuantidade() + "\n";
+            dados += "Valor Adquirido: " + totalAtual + " reais\n\n\n";
         }
-        System.out.println("Total vendido pela frutaria: " + totalVendido + " reais");
-        System.out.println("");
+        dados += "Total vendido pela frutaria: " + totalVendido + " reais\n";
+        
+        return dados;
     }
 
-    public void verRelatorio() {
+    public String verRelatorio() {
 
-        relatorioArmazenamento();
-        System.out.println("-----------------");
-        relatorioVendas();
+        String dados = "";
+        dados += relatorioArmazenamento();
+        dados += "-----------------\n\n";
+        dados += relatorioVendas();
+        return dados;
     }
 }
