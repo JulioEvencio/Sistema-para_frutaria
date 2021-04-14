@@ -1,6 +1,6 @@
 package janelas;
 
-import servidor.Gerenciador;
+import gerenciamento.Gerenciador;
 
 public class JanelaListarFrutas extends javax.swing.JFrame {
 

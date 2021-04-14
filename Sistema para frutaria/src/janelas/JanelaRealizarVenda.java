@@ -1,7 +1,7 @@
 package janelas;
 
 import javax.swing.JOptionPane;
-import servidor.Gerenciador;
+import gerenciamento.Gerenciador;
 
 public class JanelaRealizarVenda extends javax.swing.JFrame {
 

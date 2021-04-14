@@ -1,4 +1,4 @@
-package servidor;
+package gerenciamento;
 
 import frutas.Fruta;
 import frutas.Frutaria;

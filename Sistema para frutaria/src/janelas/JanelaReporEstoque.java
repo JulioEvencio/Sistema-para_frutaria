@@ -1,7 +1,7 @@
 package janelas;
 
 import javax.swing.JOptionPane;
-import servidor.Gerenciador;
+import gerenciamento.Gerenciador;
 
 public class JanelaReporEstoque extends javax.swing.JFrame {
 
