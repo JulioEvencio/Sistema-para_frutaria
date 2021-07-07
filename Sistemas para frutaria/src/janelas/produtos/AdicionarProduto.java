@@ -5,6 +5,10 @@
  */
 package janelas.produtos;
 
+import sistema.Sistema;
+import sistema.ChaveInvalidaException;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author julio
@@ -65,6 +69,11 @@ public class AdicionarProduto extends javax.swing.JDialog {
 
         btnAdicionar.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         btnAdicionar.setText("Adicionar");
+        btnAdicionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdicionarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -126,6 +135,24 @@ public class AdicionarProduto extends javax.swing.JDialog {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
+        try {
+
+            String nome = txtNome.getText();
+            int quantidade = (int) txtQuantidade.getValue();
+            double preco = (double) txtPreco.getValue();
+
+            Sistema.adicionarProduto(nome, quantidade, preco);
+
+            JOptionPane.showMessageDialog(rootPane, "Produto adicionado", "Succeso", JOptionPane.INFORMATION_MESSAGE);
+
+            this.dispose();
+
+        } catch (ChaveInvalidaException e) {
+            JOptionPane.showMessageDialog(rootPane, "Nome inválido!", "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnAdicionarActionPerformed
 
     /**
      * @param args the command line arguments
