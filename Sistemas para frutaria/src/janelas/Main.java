@@ -5,6 +5,10 @@
  */
 package janelas;
 
+import produto.Produto;
+import sistema.Sistema;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author julio
@@ -16,7 +20,30 @@ public class Main extends javax.swing.JFrame {
      */
     public Main() {
         initComponents();
+
+        this.imprimirProdutos();
     }
+
+    // Meus metodos
+    private void imprimirProdutos() {
+
+        Produto[] produtos = Sistema.getProdutos();
+
+        if (produtos == null) return;
+
+        Object[] dados = new Object[3];
+        DefaultTableModel tabela = (DefaultTableModel) tabelaProdutos.getModel();
+
+        for (Produto produto: produtos) {
+            dados[0] = produto.getNome();
+            dados[1] = produto.getQuantidade();
+            dados[2] = produto.getPreco();
+
+            tabela.addRow(dados);
+        }
+
+    }
+    // Meus metodos
 
     /**
      * This method is called from within the constructor to initialize the form.
