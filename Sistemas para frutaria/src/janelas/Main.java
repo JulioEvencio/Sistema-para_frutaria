@@ -7,6 +7,9 @@ package janelas;
 
 import produto.Produto;
 import sistema.Sistema;
+import janelas.produtos.AdicionarProduto;
+import janelas.produtos.AlterarProduto;
+import janelas.produtos.RemoverProduto;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -102,12 +105,27 @@ public class Main extends javax.swing.JFrame {
         menuProdutos.setText("Produtos");
 
         menuProdutosAdicionar.setText("Adicionar");
+        menuProdutosAdicionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuProdutosAdicionarActionPerformed(evt);
+            }
+        });
         menuProdutos.add(menuProdutosAdicionar);
 
         menuProdutosAlterar.setText("Alterar");
+        menuProdutosAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuProdutosAlterarActionPerformed(evt);
+            }
+        });
         menuProdutos.add(menuProdutosAlterar);
 
         menuProdutosRemover.setText("Remover");
+        menuProdutosRemover.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuProdutosRemoverActionPerformed(evt);
+            }
+        });
         menuProdutos.add(menuProdutosRemover);
 
         menu.add(menuProdutos);
@@ -142,6 +160,24 @@ public class Main extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void menuProdutosAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuProdutosAdicionarActionPerformed
+        new AdicionarProduto(this, true).setVisible(true);
+
+        this.imprimirProdutos();
+    }//GEN-LAST:event_menuProdutosAdicionarActionPerformed
+
+    private void menuProdutosAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuProdutosAlterarActionPerformed
+        new AlterarProduto(this, true).setVisible(true);
+
+        this.imprimirProdutos();
+    }//GEN-LAST:event_menuProdutosAlterarActionPerformed
+
+    private void menuProdutosRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuProdutosRemoverActionPerformed
+        new RemoverProduto(this, true).setVisible(true);
+
+        this.imprimirProdutos();
+    }//GEN-LAST:event_menuProdutosRemoverActionPerformed
 
     /**
      * @param args the command line arguments
