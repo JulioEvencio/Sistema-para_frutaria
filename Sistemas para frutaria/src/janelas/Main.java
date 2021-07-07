@@ -24,18 +24,20 @@ public class Main extends javax.swing.JFrame {
     public Main() {
         initComponents();
 
-        this.imprimirProdutos();
+        this.atualizarTabela();
     }
 
     // Meus metodos
-    private void imprimirProdutos() {
+    private void atualizarTabela() {
+
+        DefaultTableModel tabela = (DefaultTableModel) tabelaProdutos.getModel();
+        tabela.setRowCount(0);
 
         Produto[] produtos = Sistema.getProdutos();
 
         if (produtos == null) return;
 
         Object[] dados = new Object[3];
-        DefaultTableModel tabela = (DefaultTableModel) tabelaProdutos.getModel();
 
         for (Produto produto: produtos) {
             dados[0] = produto.getNome();
@@ -164,19 +166,19 @@ public class Main extends javax.swing.JFrame {
     private void menuProdutosAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuProdutosAdicionarActionPerformed
         new AdicionarProduto(this, true).setVisible(true);
 
-        this.imprimirProdutos();
+        this.atualizarTabela();
     }//GEN-LAST:event_menuProdutosAdicionarActionPerformed
 
     private void menuProdutosAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuProdutosAlterarActionPerformed
         new AlterarProduto(this, true).setVisible(true);
 
-        this.imprimirProdutos();
+        this.atualizarTabela();
     }//GEN-LAST:event_menuProdutosAlterarActionPerformed
 
     private void menuProdutosRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuProdutosRemoverActionPerformed
         new RemoverProduto(this, true).setVisible(true);
 
-        this.imprimirProdutos();
+        this.atualizarTabela();
     }//GEN-LAST:event_menuProdutosRemoverActionPerformed
 
     /**
