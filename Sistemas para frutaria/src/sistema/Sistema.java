@@ -16,6 +16,22 @@ public class Sistema {
 
     private static final HashMap<String, Produto> lista = new HashMap<>();
 
+    public static Produto[] getProdutos() {
+
+        if (lista.isEmpty()) return null;
+
+        int i = 0;
+        Produto[] produto = new Produto[lista.size()];
+
+        for (String chave: lista.keySet()) {
+            produto[i] = lista.get(chave);
+            i++;
+        }
+
+        return produto;
+
+    }
+
     public static void adicionarProduto(String nome, int quantidade, double preco) throws ChaveInvalidaException {
 
         if (lista.containsKey(nome)) throw new ChaveInvalidaException();
