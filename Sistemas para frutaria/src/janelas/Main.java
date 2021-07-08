@@ -10,6 +10,7 @@ import sistema.Sistema;
 import janelas.produtos.AdicionarProduto;
 import janelas.produtos.AlterarProduto;
 import janelas.produtos.RemoverProduto;
+import janelas.vendas.VenderProduto;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JOptionPane;
 
@@ -193,7 +194,9 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_menuProdutosRemoverActionPerformed
 
     private void menuVendasVenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuVendasVenderActionPerformed
-        // TODO add your handling code here:
+        new VenderProduto(this, true).setVisible(true);
+
+        this.atualizarTabela();
     }//GEN-LAST:event_menuVendasVenderActionPerformed
 
     private void menuSobreInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSobreInfoActionPerformed
