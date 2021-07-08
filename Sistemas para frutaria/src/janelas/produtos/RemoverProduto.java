@@ -5,6 +5,10 @@
  */
 package janelas.produtos;
 
+import sistema.Sistema;
+import sistema.ChaveInvalidaException;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author julio
@@ -17,7 +21,23 @@ public class RemoverProduto extends javax.swing.JDialog {
     public RemoverProduto(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+
+        this.atualizarComboBox();
     }
+
+    // Meus metodos
+    private void atualizarComboBox() {
+
+        String[] produtos = Sistema.getNomes();
+
+        if (produtos != null) {
+            for (String nome: produtos) {
+                txtProduto.addItem(nome);
+            }
+        }
+
+    }
+    // Meus metodos
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -45,21 +65,26 @@ public class RemoverProduto extends javax.swing.JDialog {
         txtProduto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione o produto" }));
 
         btnRemover.setText("Remover");
+        btnRemover.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRemoverActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, 284, Short.MAX_VALUE)
-                    .addComponent(txtProduto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnRemover)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblTitulo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 284, Short.MAX_VALUE)
+                    .addComponent(txtProduto, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnRemover)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -89,6 +114,20 @@ public class RemoverProduto extends javax.swing.JDialog {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
+        try {
+
+            Sistema.removerProduto(txtProduto.getSelectedItem().toString());
+
+            JOptionPane.showMessageDialog(rootPane, "Produto removido", "Succeso", JOptionPane.INFORMATION_MESSAGE);
+
+            this.dispose();
+
+        } catch (ChaveInvalidaException e) {
+            JOptionPane.showMessageDialog(rootPane, "Opção inválida!", "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnRemoverActionPerformed
 
     /**
      * @param args the command line arguments
