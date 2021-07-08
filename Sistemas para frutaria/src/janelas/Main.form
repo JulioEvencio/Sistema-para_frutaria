@@ -44,6 +44,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Vender"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuVendasVenderActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
@@ -56,6 +59,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Info"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuSobreInfoActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>

@@ -11,6 +11,7 @@ import janelas.produtos.AdicionarProduto;
 import janelas.produtos.AlterarProduto;
 import janelas.produtos.RemoverProduto;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -135,6 +136,11 @@ public class Main extends javax.swing.JFrame {
         menuVendas.setText("Vendas");
 
         menuVendasVender.setText("Vender");
+        menuVendasVender.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuVendasVenderActionPerformed(evt);
+            }
+        });
         menuVendas.add(menuVendasVender);
 
         menu.add(menuVendas);
@@ -142,6 +148,11 @@ public class Main extends javax.swing.JFrame {
         menuSobre.setText("Sobre");
 
         menuSobreInfo.setText("Info");
+        menuSobreInfo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuSobreInfoActionPerformed(evt);
+            }
+        });
         menuSobre.add(menuSobreInfo);
 
         menu.add(menuSobre);
@@ -180,6 +191,16 @@ public class Main extends javax.swing.JFrame {
 
         this.atualizarTabela();
     }//GEN-LAST:event_menuProdutosRemoverActionPerformed
+
+    private void menuVendasVenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuVendasVenderActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_menuVendasVenderActionPerformed
+
+    private void menuSobreInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSobreInfoActionPerformed
+        String info = "Frutaria Java - versão 1.0";
+
+        JOptionPane.showMessageDialog(rootPane, info, "Sobre", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_menuSobreInfoActionPerformed
 
     /**
      * @param args the command line arguments
