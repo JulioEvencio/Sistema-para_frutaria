@@ -5,6 +5,11 @@
  */
 package janelas.produtos;
 
+import produto.Produto;
+import sistema.Sistema;
+import sistema.ChaveInvalidaException;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author julio
@@ -17,7 +22,41 @@ public class AlterarProduto extends javax.swing.JDialog {
     public AlterarProduto(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+
+        this.atualizarComboBox();
     }
+
+    // Meus metodos
+    public void atualizarItem() {
+
+        try {
+
+            Produto produto = Sistema.getProduto(txtNome.getSelectedItem().toString());
+
+            lblQuantidadeAtual.setText("Quantidade atual: " + produto.getQuantidade());
+            lblPrecoAtual.setText("Preço atual: R$ " + produto.getPreco());
+
+        } catch (ChaveInvalidaException e) {
+
+            lblQuantidadeAtual.setText("Quantidade atual: 0");
+            lblPrecoAtual.setText("Preço atual: R$ 0,00");
+
+        }
+
+    }
+
+    private void atualizarComboBox() {
+
+        String[] produtos = Sistema.getNomes();
+
+        if (produtos != null) {
+            for (String nome: produtos) {
+                txtNome.addItem(nome);
+            }
+        }
+
+    }
+    // Meus metodos
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -49,6 +88,11 @@ public class AlterarProduto extends javax.swing.JDialog {
 
         txtNome.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         txtNome.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione o produto" }));
+        txtNome.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                txtNomeItemStateChanged(evt);
+            }
+        });
 
         lblNovaQuantidade.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         lblNovaQuantidade.setText("Nova Quantidade");
@@ -64,12 +108,17 @@ public class AlterarProduto extends javax.swing.JDialog {
 
         btnAlterar.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         btnAlterar.setText("Alterar");
+        btnAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlterarActionPerformed(evt);
+            }
+        });
 
         lblQuantidadeAtual.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        lblQuantidadeAtual.setText("Quantidade atual: xxx");
+        lblQuantidadeAtual.setText("Quantidade atual: 0");
 
         lblPrecoAtual.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        lblPrecoAtual.setText("Preço atual: R$ xxx,xx");
+        lblPrecoAtual.setText("Preço atual: R$ 0,00");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -90,7 +139,7 @@ public class AlterarProduto extends javax.swing.JDialog {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblQuantidadeAtual)
                             .addComponent(lblPrecoAtual))
-                        .addGap(0, 193, Short.MAX_VALUE))
+                        .addGap(9, 9, 9))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnAlterar)))
@@ -115,7 +164,7 @@ public class AlterarProduto extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtNovoPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblPrecoAtual, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
                 .addComponent(btnAlterar)
                 .addContainerGap())
         );
@@ -126,16 +175,40 @@ public class AlterarProduto extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 507, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 499, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)
+            .addComponent(jScrollPane1)
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void txtNomeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_txtNomeItemStateChanged
+        this.atualizarItem();
+    }//GEN-LAST:event_txtNomeItemStateChanged
+
+    private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
+        try {
+
+            String nome = txtNome.getSelectedItem().toString();
+            int quantidade = (int) txtNovaQuantidade.getValue();
+            double preco = (double) txtNovoPreco.getValue();
+
+            Sistema.alterarProduto(nome, quantidade, preco);
+
+            JOptionPane.showMessageDialog(rootPane, "Produto alterado", "Succeso", JOptionPane.INFORMATION_MESSAGE);
+
+            this.dispose();
+
+        } catch (ChaveInvalidaException e) {
+            JOptionPane.showMessageDialog(rootPane, "Opção inválida!", "Succeso", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnAlterarActionPerformed
 
     /**
      * @param args the command line arguments
