@@ -5,6 +5,12 @@
  */
 package janelas.vendas;
 
+import produto.Produto;
+import sistema.Sistema;
+import sistema.ChaveInvalidaException;
+import java.util.HashMap;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author julio
@@ -17,7 +23,52 @@ public class VenderProduto extends javax.swing.JDialog {
     public VenderProduto(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+
+        this.atualizarComboBox();
     }
+
+    // Minhas variaveis
+
+    private final HashMap<String, Produto> lista = new HashMap<>();
+    // Minhas variaveis
+
+    // Meus metodos
+    public void atualizarNotaFiscal() {
+
+        double total = 0;
+        String notaFiscal =  "-------------------------- \n"
+            + "Isso não é uma Nota Fiscal \n"
+            + "-------------------------- \n";
+
+        for (String produto: lista.keySet()) {
+
+            notaFiscal += "R$ " + lista.get(produto).getPreco();
+            notaFiscal += " | " + lista.get(produto).getQuantidade();
+            notaFiscal += " | " + lista.get(produto).getNome() + "\n";
+
+            total += lista.get(produto).getPreco() * lista.get(produto).getQuantidade();
+
+        }
+
+        notaFiscal += "-------------------------- \n"
+                + "Total: R$ " + total + "\n";
+
+        txtNotaFiscal.setText(notaFiscal);
+
+    }
+
+    private void atualizarComboBox() {
+
+        String[] produtos = Sistema.getNomes();
+
+        if (produtos != null) {
+            for (String nome: produtos) {
+                txtProduto.addItem(nome);
+            }
+        }
+
+    }
+    // Meus metodos
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -38,6 +89,7 @@ public class VenderProduto extends javax.swing.JDialog {
         txtNotaFiscal = new javax.swing.JTextArea();
         btnVender = new javax.swing.JButton();
         lblQuantidade = new javax.swing.JLabel();
+        btnRemover = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Frutaria Java");
@@ -51,6 +103,11 @@ public class VenderProduto extends javax.swing.JDialog {
 
         btnAdicionar.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         btnAdicionar.setText("Adicionar");
+        btnAdicionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdicionarActionPerformed(evt);
+            }
+        });
 
         txtQuantidade.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         txtQuantidade.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
@@ -63,9 +120,22 @@ public class VenderProduto extends javax.swing.JDialog {
 
         btnVender.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         btnVender.setText("Vender");
+        btnVender.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVenderActionPerformed(evt);
+            }
+        });
 
         lblQuantidade.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         lblQuantidade.setText("Quantidade:");
+
+        btnRemover.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        btnRemover.setText("Remover");
+        btnRemover.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRemoverActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -83,12 +153,13 @@ public class VenderProduto extends javax.swing.JDialog {
                                 .addComponent(btnVender, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(lblQuantidade, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                                    .addComponent(btnRemover, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                        .addComponent(lblQuantidade)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(btnAdicionar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addComponent(btnAdicionar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtQuantidade, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addComponent(txtProduto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -107,10 +178,12 @@ public class VenderProduto extends javax.swing.JDialog {
                             .addComponent(lblQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addComponent(btnAdicionar)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnAdicionar)
+                            .addComponent(btnRemover))
                         .addGap(88, 88, 88)
                         .addComponent(btnVender)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         jScrollPane1.setViewportView(jPanel1);
@@ -123,12 +196,65 @@ public class VenderProduto extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
+            .addComponent(jScrollPane1)
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
+        try {
+
+            Produto produtoEstoque = Sistema.getProduto(txtProduto.getSelectedItem().toString());
+            Produto produto = new Produto(produtoEstoque.getNome(), (int) txtQuantidade.getValue(), produtoEstoque.getPreco());
+
+            if (produtoEstoque.getQuantidade() < produto.getQuantidade()) {
+                JOptionPane.showMessageDialog(rootPane, "Quantidade insuficiente no estoque! Quantidade no estoque: " + produtoEstoque.getQuantidade(), "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            lista.put(produto.getNome(), produto);
+
+            this.atualizarNotaFiscal();
+
+        } catch (ChaveInvalidaException e) {
+
+            JOptionPane.showMessageDialog(rootPane, "Opção inválida!", "Erro", JOptionPane.ERROR_MESSAGE);
+
+        } finally {
+            txtQuantidade.setValue(0);
+        }
+    }//GEN-LAST:event_btnAdicionarActionPerformed
+
+    private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
+        try {
+
+            lista.remove(txtProduto.getSelectedItem().toString());
+
+            this.atualizarNotaFiscal();
+
+        } catch (ChaveInvalidaException e) {
+
+            JOptionPane.showMessageDialog(rootPane, "Opção inválida!", "Erro", JOptionPane.ERROR_MESSAGE);
+
+        }
+    }//GEN-LAST:event_btnRemoverActionPerformed
+
+    private void btnVenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVenderActionPerformed
+        for (String nome: lista.keySet()) {
+
+            Produto produto = Sistema.getProduto(nome);
+            int quantidade = produto.getQuantidade() - lista.get(nome).getQuantidade();
+
+            Sistema.alterarProduto(produto.getNome(), quantidade, produto.getPreco());
+
+        }
+
+        JOptionPane.showMessageDialog(rootPane, "Venda realizada com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+
+        this.dispose();
+    }//GEN-LAST:event_btnVenderActionPerformed
 
     /**
      * @param args the command line arguments
@@ -174,6 +300,7 @@ public class VenderProduto extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdicionar;
+    private javax.swing.JButton btnRemover;
     private javax.swing.JButton btnVender;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
