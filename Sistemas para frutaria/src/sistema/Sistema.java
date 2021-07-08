@@ -35,6 +35,14 @@ public class Sistema {
 
     }
 
+    public static Produto getProduto(String nome) throws ChaveInvalidaException {
+
+        if (!lista.containsKey(nome)) throw new ChaveInvalidaException();
+
+        return lista.get(nome);
+
+    }
+
     public static Produto[] getProdutos() {
 
         if (lista.isEmpty()) return null;
