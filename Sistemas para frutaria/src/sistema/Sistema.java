@@ -7,6 +7,7 @@ package sistema;
 
 import produto.Produto;
 import java.util.HashMap;
+import java.util.Arrays;
 
 /**
  *
@@ -21,9 +22,18 @@ public class Sistema {
         if (lista.isEmpty()) return null;
 
         int i = 0;
+        String[] nome = new String[lista.size()];
         Produto[] produto = new Produto[lista.size()];
 
         for (String chave: lista.keySet()) {
+            nome[i] = lista.get(chave).getNome();
+            i++;
+        }
+
+        Arrays.sort(nome);
+        i = 0;
+
+        for (String chave: nome) {
             produto[i] = lista.get(chave);
             i++;
         }
