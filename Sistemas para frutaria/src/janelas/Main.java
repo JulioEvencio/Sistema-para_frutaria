@@ -200,7 +200,7 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_menuVendasVenderActionPerformed
 
     private void menuSobreInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSobreInfoActionPerformed
-        String info = "Frutaria Java - versão 1.0";
+        String info = "Frutaria Java --versão 1.0";
 
         JOptionPane.showMessageDialog(rootPane, info, "Sobre", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_menuSobreInfoActionPerformed
