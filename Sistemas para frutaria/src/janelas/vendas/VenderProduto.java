@@ -25,6 +25,7 @@ public class VenderProduto extends javax.swing.JDialog {
         initComponents();
 
         this.atualizarComboBox();
+        this.atualizarNotaFiscal();
     }
 
     // Minhas variaveis
@@ -42,8 +43,8 @@ public class VenderProduto extends javax.swing.JDialog {
 
         for (String produto: lista.keySet()) {
 
-            notaFiscal += "R$ " + lista.get(produto).getPreco();
-            notaFiscal += " | " + lista.get(produto).getQuantidade();
+            notaFiscal += "R$ " + String.format("%.2f", lista.get(produto).getPreco());
+            notaFiscal += " | " + String.format("%5d", lista.get(produto).getQuantidade());
             notaFiscal += " | " + lista.get(produto).getNome() + "\n";
 
             total += lista.get(produto).getPreco() * lista.get(produto).getQuantidade();
@@ -51,7 +52,7 @@ public class VenderProduto extends javax.swing.JDialog {
         }
 
         notaFiscal += "-------------------------- \n"
-                + "Total: R$ " + total + "\n";
+                + "Total: R$ " + String.format("%.2f", total) + "\n";
 
         txtNotaFiscal.setText(notaFiscal);
 
@@ -206,11 +207,16 @@ public class VenderProduto extends javax.swing.JDialog {
     private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
         try {
 
+            if ((int) txtQuantidade.getValue() == 0) {
+                JOptionPane.showMessageDialog(rootPane, "Selecione uma quantidade superior a 0!", "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
             Produto produtoEstoque = Sistema.getProduto(txtProduto.getSelectedItem().toString());
             Produto produto = new Produto(produtoEstoque.getNome(), (int) txtQuantidade.getValue(), produtoEstoque.getPreco());
 
             if (produtoEstoque.getQuantidade() < produto.getQuantidade()) {
-                JOptionPane.showMessageDialog(rootPane, "Quantidade insuficiente no estoque! Quantidade no estoque: " + produtoEstoque.getQuantidade(), "Erro", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(rootPane, "Quantidade insuficiente no estoque! \nQuantidade no estoque: " + produtoEstoque.getQuantidade(), "Erro", JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
@@ -238,10 +244,17 @@ public class VenderProduto extends javax.swing.JDialog {
 
             JOptionPane.showMessageDialog(rootPane, "Opção inválida!", "Erro", JOptionPane.ERROR_MESSAGE);
 
+        } finally {
+            txtQuantidade.setValue(0);
         }
     }//GEN-LAST:event_btnRemoverActionPerformed
 
     private void btnVenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVenderActionPerformed
+        if (lista.isEmpty()) {
+            JOptionPane.showMessageDialog(rootPane, "Selecione um item!", "Erro", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
         for (String nome: lista.keySet()) {
 
             Produto produto = Sistema.getProduto(nome);
