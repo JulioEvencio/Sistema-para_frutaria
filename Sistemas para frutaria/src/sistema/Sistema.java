@@ -62,7 +62,7 @@ public class Sistema {
 
     public static void adicionarProduto(String nome, int quantidade, double preco) throws ChaveInvalidaException {
 
-        if (lista.containsKey(nome)) throw new ChaveInvalidaException();
+        if (lista.containsKey(nome) || nome.equals("Selecione o produto")) throw new ChaveInvalidaException();
 
         lista.put(nome, new Produto(nome, quantidade, preco));
 
