@@ -147,7 +147,9 @@ public class AdicionarProduto extends javax.swing.JDialog {
 
             JOptionPane.showMessageDialog(rootPane, "Produto adicionado", "Succeso", JOptionPane.INFORMATION_MESSAGE);
 
-            this.dispose();
+            txtNome.setText("");
+            txtQuantidade.setValue(0);
+            txtPreco.setValue(0);
 
         } catch (ChaveInvalidaException e) {
             JOptionPane.showMessageDialog(rootPane, "Nome inválido!", "Erro", JOptionPane.ERROR_MESSAGE);
