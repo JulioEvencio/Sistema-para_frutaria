@@ -203,7 +203,7 @@ public class AlterarProduto extends javax.swing.JDialog {
 
             JOptionPane.showMessageDialog(rootPane, "Produto alterado", "Succeso", JOptionPane.INFORMATION_MESSAGE);
 
-            this.atualizarItem();
+            this.dispose();
 
         } catch (ChaveInvalidaException e) {
             JOptionPane.showMessageDialog(rootPane, "Opção inválida!", "Erro", JOptionPane.ERROR_MESSAGE);
