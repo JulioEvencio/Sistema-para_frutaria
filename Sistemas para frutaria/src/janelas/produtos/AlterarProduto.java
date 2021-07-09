@@ -34,7 +34,7 @@ public class AlterarProduto extends javax.swing.JDialog {
             Produto produto = Sistema.getProduto(txtNome.getSelectedItem().toString());
 
             lblQuantidadeAtual.setText("Quantidade atual: " + produto.getQuantidade());
-            lblPrecoAtual.setText("Preço atual: R$ " + produto.getPreco());
+            lblPrecoAtual.setText("Preço atual: R$ " + String.format("%.2f", produto.getPreco()));
 
         } catch (ChaveInvalidaException e) {
 
@@ -203,10 +203,10 @@ public class AlterarProduto extends javax.swing.JDialog {
 
             JOptionPane.showMessageDialog(rootPane, "Produto alterado", "Succeso", JOptionPane.INFORMATION_MESSAGE);
 
-            this.dispose();
+            this.atualizarItem();
 
         } catch (ChaveInvalidaException e) {
-            JOptionPane.showMessageDialog(rootPane, "Opção inválida!", "Succeso", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(rootPane, "Opção inválida!", "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnAlterarActionPerformed
 
