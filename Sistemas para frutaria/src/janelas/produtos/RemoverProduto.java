@@ -122,8 +122,6 @@ public class RemoverProduto extends javax.swing.JDialog {
 
             JOptionPane.showMessageDialog(rootPane, "Produto removido", "Succeso", JOptionPane.INFORMATION_MESSAGE);
 
-            this.dispose();
-
         } catch (ChaveInvalidaException e) {
             JOptionPane.showMessageDialog(rootPane, "Opção inválida!", "Erro", JOptionPane.ERROR_MESSAGE);
         }
